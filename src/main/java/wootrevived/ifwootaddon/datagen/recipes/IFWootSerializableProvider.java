@@ -7,18 +7,15 @@ import com.buuz135.industrial.recipe.LaserDrillFluidRecipe;
 import com.buuz135.industrial.recipe.LaserDrillOreRecipe;
 import com.buuz135.industrial.recipe.LaserDrillRarity;
 import com.buuz135.industrial.utils.IndustrialTags;
-import com.hrznstudio.titanium.recipe.generator.IJSONGenerator;
-import com.hrznstudio.titanium.recipe.generator.IJsonFile;
-import com.hrznstudio.titanium.recipe.generator.TitaniumSerializableProvider;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.resources.ResourceKey;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
-import wootrevived.ifwootaddon.IFWootAddon;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
+import net.neoforged.neoforge.fluids.FluidStack;
 import wootrevived.ifwootaddon.upgrades.LaserDrill;
 import wootrevived.ifwootaddon.upgrades.MobCrusher;
 import wootrevived.ifwootaddon.upgrades.MobSlaughterFactory;
@@ -26,181 +23,163 @@ import wootrevived.woot.registries.FluidsRegistry;
 import wootrevived.woot.registries.ItemsRegistry;
 import wootrevived.woot.registries.UpgradeItemsRegistry;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
-public class IFWootSerializableProvider extends TitaniumSerializableProvider {
-    public IFWootSerializableProvider(DataGenerator generatorIn) {
-        super(generatorIn, IFWootAddon.MOD_ID);
-    }
+public class IFWootSerializableProvider extends RecipeProvider {
+    public IFWootSerializableProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) { super(packOutput, provider); }
 
     @Override
-    public void add(Map<IJsonFile, IJSONGenerator> serializables) {
-        new DissolutionChamberRecipe(
-                IFWootAddon.location(LaserDrill.LASER_DRILL_TAG),
-                new Ingredient.Value[]{
-                        new Ingredient.ItemValue(new ItemStack(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get())),
-                        new Ingredient.TagValue(IndustrialTags.Items.MACHINE_FRAME_ADVANCED),
-                        new Ingredient.ItemValue(new ItemStack(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get())),
-                        new Ingredient.ItemValue(new ItemStack(ModuleResourceProduction.ORE_LASER_BASE.getKey().get())),
-                        new Ingredient.ItemValue(new ItemStack(ModuleResourceProduction.FLUID_LASER_BASE.getKey().get())),
-                        new Ingredient.TagValue(IndustrialTags.Items.GEAR_DIAMOND),
-                        new Ingredient.ItemValue(new ItemStack(ModuleResourceProduction.LASER_DRILL.getKey().get())),
-                        new Ingredient.TagValue(IndustrialTags.Items.GEAR_DIAMOND),
-                },
+    protected void buildRecipes(RecipeOutput output) {
+        DissolutionChamberRecipe.createRecipe(output, LaserDrill.LASER_DRILL_TAG, new DissolutionChamberRecipe(
+                List.of(
+                        Ingredient.of(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get()),
+                        Ingredient.of(IndustrialTags.Items.MACHINE_FRAME_ADVANCED),
+                        Ingredient.of(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get()),
+                        Ingredient.of(ModuleResourceProduction.FLUID_LASER_BASE.getBlock()),
+                        Ingredient.of(ModuleResourceProduction.FLUID_LASER_BASE.getBlock()),
+                        Ingredient.of(IndustrialTags.Items.GEAR_DIAMOND),
+                        Ingredient.of(ModuleResourceProduction.LASER_DRILL.getBlock()),
+                        Ingredient.of(IndustrialTags.Items.GEAR_DIAMOND)
+                ),
                 new FluidStack(FluidsRegistry.SOURCE_VITALITY_FUEL_FLUID.get(), 2000),
                 150,
-                new ItemStack(LaserDrill.LASER_DRILL_ITEM.get()),
-                FluidStack.EMPTY
-        );
-        new DissolutionChamberRecipe(
-                IFWootAddon.location(MobCrusher.MOB_CRUSHER_TAG),
-                new Ingredient.Value[]{
-                        new Ingredient.ItemValue(new ItemStack(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get())),
-                        new Ingredient.TagValue(IndustrialTags.Items.MACHINE_FRAME_ADVANCED),
-                        new Ingredient.ItemValue(new ItemStack(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get())),
-                        new Ingredient.ItemValue(new ItemStack(ModuleAgricultureHusbandry.MOB_CRUSHER.getKey().get())),
-                        new Ingredient.ItemValue(new ItemStack(ModuleAgricultureHusbandry.MOB_CRUSHER.getKey().get())),
-                        new Ingredient.ItemValue(new ItemStack(Items.NETHERITE_SCRAP)),
-                        new Ingredient.TagValue(IndustrialTags.Items.GEAR_DIAMOND),
-                        new Ingredient.ItemValue(new ItemStack(Items.NETHERITE_SCRAP)),
-                },
+                Optional.of(LaserDrill.LASER_DRILL_ITEM.get().getDefaultInstance()),
+                Optional.empty()
+        ));
+
+        DissolutionChamberRecipe.createRecipe(output, MobCrusher.MOB_CRUSHER_TAG, new DissolutionChamberRecipe(
+                List.of(
+                        Ingredient.of(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get()),
+                        Ingredient.of(IndustrialTags.Items.MACHINE_FRAME_ADVANCED),
+                        Ingredient.of(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get()),
+                        Ingredient.of(ModuleAgricultureHusbandry.MOB_CRUSHER.getBlock()),
+                        Ingredient.of(ModuleAgricultureHusbandry.MOB_CRUSHER.getBlock()),
+                        Ingredient.of(Items.NETHERITE_SCRAP),
+                        Ingredient.of(IndustrialTags.Items.GEAR_DIAMOND),
+                        Ingredient.of(Items.NETHERITE_SCRAP)
+                ),
                 new FluidStack(FluidsRegistry.SOURCE_VITALITY_FUEL_FLUID.get(), 2000),
                 150,
-                new ItemStack(MobCrusher.MOB_CRUSHER_ITEM.get()),
-                FluidStack.EMPTY
-        );
-        new DissolutionChamberRecipe(
-                IFWootAddon.location(MobSlaughterFactory.MOB_SLAUGHTER_FACTORY_TAG),
-                new Ingredient.Value[]{
-                        new Ingredient.ItemValue(new ItemStack(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get())),
-                        new Ingredient.TagValue(IndustrialTags.Items.MACHINE_FRAME_SIMPLE),
-                        new Ingredient.ItemValue(new ItemStack(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get())),
-                        new Ingredient.ItemValue(new ItemStack(ModuleAgricultureHusbandry.SLAUGHTER_FACTORY.getKey().get())),
-                        new Ingredient.ItemValue(new ItemStack(ModuleAgricultureHusbandry.SLAUGHTER_FACTORY.getKey().get())),
-                        new Ingredient.TagValue(IndustrialTags.Items.GEAR_GOLD),
-                        new Ingredient.ItemValue(new ItemStack(Items.REDSTONE)),
-                        new Ingredient.TagValue(IndustrialTags.Items.GEAR_GOLD),
-                },
+                Optional.of(MobCrusher.MOB_CRUSHER_ITEM.get().getDefaultInstance()),
+                Optional.empty()
+        ));
+
+        DissolutionChamberRecipe.createRecipe(output, MobSlaughterFactory.MOB_SLAUGHTER_FACTORY_TAG, new DissolutionChamberRecipe(
+                List.of(
+                        Ingredient.of(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get()),
+                        Ingredient.of(IndustrialTags.Items.MACHINE_FRAME_SIMPLE),
+                        Ingredient.of(UpgradeItemsRegistry.UPGRADE_BASE_ITEM.get()),
+                        Ingredient.of(ModuleAgricultureHusbandry.SLAUGHTER_FACTORY.getBlock()),
+                        Ingredient.of(ModuleAgricultureHusbandry.SLAUGHTER_FACTORY.getBlock()),
+                        Ingredient.of(IndustrialTags.Items.GEAR_GOLD),
+                        Ingredient.of(Items.REDSTONE),
+                        Ingredient.of(IndustrialTags.Items.GEAR_GOLD)
+                ),
                 new FluidStack(FluidsRegistry.SOURCE_VITALITY_FUEL_FLUID.get(), 2000),
                 150,
-                new ItemStack(MobSlaughterFactory.MOB_SLAUGHTER_FACTORY_ITEM.get()),
-                FluidStack.EMPTY
-        );
-        DissolutionChamberRecipe.RECIPES.forEach(dissolutionChamberRecipe -> serializables.put(dissolutionChamberRecipe, dissolutionChamberRecipe));
+                Optional.of(MobSlaughterFactory.MOB_SLAUGHTER_FACTORY_ITEM.get().getDefaultInstance()),
+                Optional.empty()
+        ));
 
-        LaserDrillOreRecipe.createNether(
-                ItemsRegistry.STYGIAN_DUST_TAG,
-                Ingredient.of(ItemsRegistry.STYGIAN_DUST_ITEM.get()),
-                2, 7, 117, 10, null
+        LaserDrillOreRecipe.createItemRecipe(
+                output,
+                ItemsRegistry.STYGIAN_DUST_ITEM.get(),
+                2,
+                new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(List.of(), List.of()), new LaserDrillRarity.DimensionRarity(List.of(BuiltinDimensionTypes.NETHER), List.of()), 7, 117, 10)
         );
-        LaserDrillOreRecipe.RECIPES.forEach(dissolutionChamberRecipe -> serializables.put(dissolutionChamberRecipe, dissolutionChamberRecipe));
 
-        new LaserDrillFluidRecipe(
-                "warden",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 30000).writeToNBT(new CompoundTag()),
+        LaserDrillFluidRecipe.createRecipe(output, "warden", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 30000),
                 10,
-                new ResourceLocation("minecraft", "warden"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "wither",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 20000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "warden"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "wither", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 20000),
                 10,
-                new ResourceLocation("minecraft", "wither"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "ender_dragon",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 10000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "wither"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "ender_dragon", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 10000),
                 10,
-                new ResourceLocation("minecraft", "ender_dragon"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "wither_skeleton",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "ender_dragon"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "wither_skeleton", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
                 10,
-                new ResourceLocation("minecraft", "wither_skeleton"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "ghast",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "wither_skeleton"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "ghast", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
                 10,
-                new ResourceLocation("minecraft", "ghast"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "enderman",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "ghast"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "enderman", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
                 10,
-                new ResourceLocation("minecraft", "enderman"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "blaze",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 2000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "enderman"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "blaze", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 2000),
                 10,
-                new ResourceLocation("minecraft", "blaze"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "zombie",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "blaze"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "zombie", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 10,
-                new ResourceLocation("minecraft", "zombie"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "skeleton",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "zombie"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "skeleton", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 10,
-                new ResourceLocation("minecraft", "skeleton"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "creeper",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "skeleton"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "creeper", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 10,
-                new ResourceLocation("minecraft", "creeper"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "spider",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "creeper"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "spider", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 10,
-                new ResourceLocation("minecraft", "spider"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "cow",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "spider"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "cow", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 10,
-                new ResourceLocation("minecraft", "cow"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "sheep",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "cow"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "sheep", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 10,
-                new ResourceLocation("minecraft", "sheep"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "chicken",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "sheep"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "chicken", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 10,
-                new ResourceLocation("minecraft", "chicken"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        new LaserDrillFluidRecipe(
-                "pig",
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500).writeToNBT(new CompoundTag()),
+                ResourceLocation.fromNamespaceAndPath("minecraft", "chicken"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
+        LaserDrillFluidRecipe.createRecipe(output, "pig", "minecraft", new LaserDrillFluidRecipe(
+                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 10,
-                new ResourceLocation("minecraft", "pig"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new ResourceKey[0], new ResourceKey[0], -64, 256, 8)}
-        );
-        LaserDrillFluidRecipe.RECIPES.forEach(dissolutionChamberRecipe -> serializables.put(dissolutionChamberRecipe, dissolutionChamberRecipe));
-
+                ResourceLocation.fromNamespaceAndPath("minecraft", "pig"),
+                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+        ));
     }
 }

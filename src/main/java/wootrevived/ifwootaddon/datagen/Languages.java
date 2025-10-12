@@ -4,7 +4,7 @@ import net.minecraft.Util;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 import wootrevived.ifwootaddon.datagen.languages.English;
 
 import java.util.ArrayList;

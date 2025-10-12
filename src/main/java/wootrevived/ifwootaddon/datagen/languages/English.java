@@ -1,7 +1,7 @@
 package wootrevived.ifwootaddon.datagen.languages;
 
 import net.minecraft.data.PackOutput;
-import net.minecraftforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.common.data.LanguageProvider;
 import wootrevived.ifwootaddon.IFWootAddon;
 import wootrevived.ifwootaddon.upgrades.LaserDrill;
 import wootrevived.ifwootaddon.upgrades.MobCrusher;

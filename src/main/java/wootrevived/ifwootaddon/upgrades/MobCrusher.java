@@ -1,11 +1,11 @@
 package wootrevived.ifwootaddon.upgrades;
 
 import com.buuz135.industrial.module.ModuleCore;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import wootrevived.api.WootUpgradeItem;
 import wootrevived.api.interfaces.WootDropsProperties;
 import wootrevived.api.registrations.WootUpgradeItemRegistration;
@@ -29,7 +29,7 @@ public class MobCrusher extends WootUpgradeItem {
 
     /* Upgrade Item registration */
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, IFWootAddon.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, IFWootAddon.MOD_ID);
 
     public static void register(WootUpgradeItemRegistration registration){
         ITEMS.register(registration.getWootEventBus());
@@ -37,5 +37,5 @@ public class MobCrusher extends WootUpgradeItem {
     }
 
     public static final String MOB_CRUSHER_TAG = "mob_crusher_upgrade";
-    public static final RegistryObject<MobCrusher> MOB_CRUSHER_ITEM = ITEMS.register(MOB_CRUSHER_TAG, () -> new MobCrusher(1));
+    public static final DeferredHolder<Item, MobCrusher> MOB_CRUSHER_ITEM = ITEMS.register(MOB_CRUSHER_TAG, () -> new MobCrusher(1));
 }

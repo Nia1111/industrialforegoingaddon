@@ -3,11 +3,11 @@ package wootrevived.ifwootaddon.upgrades;
 import com.buuz135.industrial.module.ModuleCore;
 import com.buuz135.industrial.recipe.LaserDrillFluidRecipe;
 import com.hrznstudio.titanium.util.RecipeUtil;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import wootrevived.api.WootUpgradeItem;
 import wootrevived.api.interfaces.WootDropsProperties;
 import wootrevived.api.registrations.WootUpgradeItemRegistration;
@@ -26,15 +26,15 @@ public class LaserDrill extends WootUpgradeItem {
         List<LaserDrillFluidRecipe> fluidRecipes = (List<LaserDrillFluidRecipe>) RecipeUtil.getRecipes(properties.getLevel(), ModuleCore.LASER_DRILL_FLUID_TYPE.get());
         for(LaserDrillFluidRecipe recipe : fluidRecipes){
             if(!recipe.entity.equals(LaserDrillFluidRecipe.EMPTY) &&
-                    recipe.entity.equals(ForgeRegistries.ENTITY_TYPES.getKey(properties.getFactoryMob().getEntityType()))){
-                fluids.add(FluidStack.loadFluidStackFromNBT(recipe.output));
+                    recipe.entity.equals(BuiltInRegistries.ENTITY_TYPE.getKey(properties.getFactoryMob().getEntityType()))){
+                fluids.add(recipe.output.copy());
             }
         }
     }
 
     /* Upgrade Item registration */
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, IFWootAddon.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, IFWootAddon.MOD_ID);
 
     public static void register(WootUpgradeItemRegistration registration){
         ITEMS.register(registration.getWootEventBus());
@@ -42,5 +42,5 @@ public class LaserDrill extends WootUpgradeItem {
     }
 
     public static final String LASER_DRILL_TAG = "laser_drill_upgrade";
-    public static final RegistryObject<LaserDrill> LASER_DRILL_ITEM = ITEMS.register(LASER_DRILL_TAG, () -> new LaserDrill(1));
+    public static final DeferredHolder<Item, LaserDrill> LASER_DRILL_ITEM = ITEMS.register(LASER_DRILL_TAG, () -> new LaserDrill(1));
 }

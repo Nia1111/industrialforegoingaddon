@@ -1,13 +1,13 @@
 package wootrevived.ifwootaddon.upgrades;
 
 import com.buuz135.industrial.module.ModuleCore;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import wootrevived.api.WootUpgradeItem;
 import wootrevived.api.interfaces.WootDropsProperties;
 import wootrevived.api.registrations.WootUpgradeItemRegistration;
@@ -33,7 +33,7 @@ public class MobSlaughterFactory extends WootUpgradeItem {
 
     /* Upgrade Item registration */
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.Keys.ITEMS, IFWootAddon.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(BuiltInRegistries.ITEM, IFWootAddon.MOD_ID);
 
     public static void register(WootUpgradeItemRegistration registration){
         ITEMS.register(registration.getWootEventBus());
@@ -41,5 +41,5 @@ public class MobSlaughterFactory extends WootUpgradeItem {
     }
 
     public static final String MOB_SLAUGHTER_FACTORY_TAG = "mob_slaughter_factory_upgrade";
-    public static final RegistryObject<MobSlaughterFactory> MOB_SLAUGHTER_FACTORY_ITEM = ITEMS.register(MOB_SLAUGHTER_FACTORY_TAG, () -> new MobSlaughterFactory(1));
+    public static final DeferredHolder<Item, MobSlaughterFactory> MOB_SLAUGHTER_FACTORY_ITEM = ITEMS.register(MOB_SLAUGHTER_FACTORY_TAG, () -> new MobSlaughterFactory(1));
 }

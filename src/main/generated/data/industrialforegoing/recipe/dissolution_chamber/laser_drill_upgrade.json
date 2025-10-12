@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "ifwootaddon:laser_drill_upgrade"
+    }
+  ],
+  "type": "industrialforegoing:dissolution_chamber",
+  "input": [
+    {
+      "item": "woot_revived:upgrade_base"
+    },
+    {
+      "tag": "industrialforegoing:machine_frame/advanced"
+    },
+    {
+      "item": "woot_revived:upgrade_base"
+    },
+    {
+      "item": "industrialforegoing:fluid_laser_base"
+    },
+    {
+      "item": "industrialforegoing:fluid_laser_base"
+    },
+    {
+      "tag": "c:gears/diamond"
+    },
+    {
+      "item": "industrialforegoing:laser_drill"
+    },
+    {
+      "tag": "c:gears/diamond"
+    }
+  ],
+  "inputFluid": {
+    "amount": 2000,
+    "fluid": "woot_revived:vitality_fuel_fluid"
+  },
+  "output": {
+    "count": 1,
+    "id": "ifwootaddon:laser_drill_upgrade"
+  },
+  "processingTime": 150
+}

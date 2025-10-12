@@ -1,0 +1,40 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+issueTrackerURL = "https://github.com/wootrevived/industrialforegoingaddon/issues"
+license = "MIT"
+
+[[mods]]
+modId = "${file.modId}"
+version = "${file.jarVersion}"
+displayName = "${file.modName}"
+displayURL = "https://github.com/wootrevived/industrialforegoingaddon"
+authors = "pharuxtan"
+description = '''Woot Revived Addon that add compatibility with Industrial Foregoing'''
+
+[[dependencies.${file.modId}]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${mc_version}]"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${file.modId}]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${neo_version},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${file.modId}]]
+modId="woot_revived"
+type = "required"
+versionRange = "[${woot_version},)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${file.modId}]]
+modId="industrialforegoing"
+type = "required"
+versionRange = "[${if_version},)"
+ordering="NONE"
+side="BOTH"

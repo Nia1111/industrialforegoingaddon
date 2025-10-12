@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "ifwootaddon:mob_slaughter_factory_upgrade"
+    }
+  ],
+  "type": "industrialforegoing:dissolution_chamber",
+  "input": [
+    {
+      "item": "woot_revived:upgrade_base"
+    },
+    {
+      "tag": "industrialforegoing:machine_frame/simple"
+    },
+    {
+      "item": "woot_revived:upgrade_base"
+    },
+    {
+      "item": "industrialforegoing:mob_slaughter_factory"
+    },
+    {
+      "item": "industrialforegoing:mob_slaughter_factory"
+    },
+    {
+      "tag": "c:gears/gold"
+    },
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "tag": "c:gears/gold"
+    }
+  ],
+  "inputFluid": {
+    "amount": 2000,
+    "fluid": "woot_revived:vitality_fuel_fluid"
+  },
+  "output": {
+    "count": 1,
+    "id": "ifwootaddon:mob_slaughter_factory_upgrade"
+  },
+  "processingTime": 150
+}

@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:item_exists",
+      "item": "ifwootaddon:mob_crusher_upgrade"
+    }
+  ],
+  "type": "industrialforegoing:dissolution_chamber",
+  "input": [
+    {
+      "item": "woot_revived:upgrade_base"
+    },
+    {
+      "tag": "industrialforegoing:machine_frame/advanced"
+    },
+    {
+      "item": "woot_revived:upgrade_base"
+    },
+    {
+      "item": "industrialforegoing:mob_crusher"
+    },
+    {
+      "item": "industrialforegoing:mob_crusher"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    },
+    {
+      "tag": "c:gears/diamond"
+    },
+    {
+      "item": "minecraft:netherite_scrap"
+    }
+  ],
+  "inputFluid": {
+    "amount": 2000,
+    "fluid": "woot_revived:vitality_fuel_fluid"
+  },
+  "output": {
+    "count": 1,
+    "id": "ifwootaddon:mob_crusher_upgrade"
+  },
+  "processingTime": 150
+}
