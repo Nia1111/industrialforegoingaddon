@@ -1,0 +1,28 @@
+{
+  "type": "industrialforegoing:laser_drill_ore",
+  "catalyst": {
+    "item": "industrialforegoing:laser_lens2"
+  },
+  "output": {
+    "item": "woot_revived:stygian_dust"
+  },
+  "pointer": 0,
+  "rarity": [
+    {
+      "blacklist": {},
+      "depth_max": 117,
+      "depth_min": 7,
+      "weight": 10,
+      "whitelist": {
+        "type": "minecraft:worldgen/biome",
+        "values": [
+          "minecraft:nether_wastes",
+          "minecraft:basalt_deltas",
+          "minecraft:warped_forest",
+          "minecraft:crimson_forest",
+          "minecraft:soul_sand_valley"
+        ]
+      }
+    }
+  ]
+}
