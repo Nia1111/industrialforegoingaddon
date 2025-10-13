@@ -1,15 +1,15 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:mod_loaded",
-      "modid": "minecraft"
+      "type": "neoforge:item_exists",
+      "item": "ifwootaddon:mob_crusher_upgrade"
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "industrialforegoing:laser_drill_fluid/spider"
+        "recipe": "ifwootaddon:dissolution_chamber/mob_crusher_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,7 +21,7 @@
   ],
   "rewards": {
     "recipes": [
-      "industrialforegoing:laser_drill_fluid/spider"
+      "ifwootaddon:dissolution_chamber/mob_crusher_upgrade"
     ]
   }
 }

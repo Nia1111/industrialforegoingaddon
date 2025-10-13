@@ -1,15 +1,15 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:mod_loaded",
-      "modid": "minecraft"
+      "type": "neoforge:item_exists",
+      "item": "ifwootaddon:mob_slaughter_factory_upgrade"
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "industrialforegoing:laser_drill_fluid/pig"
+        "recipe": "ifwootaddon:dissolution_chamber/mob_slaughter_factory_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,7 +21,7 @@
   ],
   "rewards": {
     "recipes": [
-      "industrialforegoing:laser_drill_fluid/pig"
+      "ifwootaddon:dissolution_chamber/mob_slaughter_factory_upgrade"
     ]
   }
 }

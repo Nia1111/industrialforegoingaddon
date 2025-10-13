@@ -1,15 +1,15 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:item_exists",
-      "item": "ifwootaddon:mob_slaughter_factory_upgrade"
+      "type": "neoforge:mod_loaded",
+      "modid": "minecraft"
     }
   ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "industrialforegoing:dissolution_chamber/mob_slaughter_factory_upgrade"
+        "recipe": "ifwootaddon:laser_drill_fluid/chicken_mob_tears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,7 +21,7 @@
   ],
   "rewards": {
     "recipes": [
-      "industrialforegoing:dissolution_chamber/mob_slaughter_factory_upgrade"
+      "ifwootaddon:laser_drill_fluid/chicken_mob_tears"
     ]
   }
 }

@@ -9,7 +9,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "industrialforegoing:laser_drill_fluid/chicken"
+        "recipe": "ifwootaddon:laser_drill_fluid/cow_mob_tears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,7 +21,7 @@
   ],
   "rewards": {
     "recipes": [
-      "industrialforegoing:laser_drill_fluid/chicken"
+      "ifwootaddon:laser_drill_fluid/cow_mob_tears"
     ]
   }
 }

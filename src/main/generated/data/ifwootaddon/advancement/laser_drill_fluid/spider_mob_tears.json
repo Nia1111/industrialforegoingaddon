@@ -9,7 +9,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "industrialforegoing:laser_drill_fluid/warden"
+        "recipe": "ifwootaddon:laser_drill_fluid/spider_mob_tears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,7 +21,7 @@
   ],
   "rewards": {
     "recipes": [
-      "industrialforegoing:laser_drill_fluid/warden"
+      "ifwootaddon:laser_drill_fluid/spider_mob_tears"
     ]
   }
 }

@@ -1,9 +1,15 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "minecraft"
+    }
+  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "industrialforegoing:laser_drill_ore/stygian_dust"
+        "recipe": "ifwootaddon:laser_drill_fluid/blaze_mob_tears"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -15,7 +21,7 @@
   ],
   "rewards": {
     "recipes": [
-      "industrialforegoing:laser_drill_ore/stygian_dust"
+      "ifwootaddon:laser_drill_fluid/blaze_mob_tears"
     ]
   }
 }

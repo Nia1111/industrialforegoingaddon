@@ -1,15 +1,9 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "minecraft"
-    }
-  ],
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "industrialforegoing:laser_drill_fluid/wither"
+        "recipe": "ifwootaddon:laser_drill_ore/stygian_dust"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,7 +15,7 @@
   ],
   "rewards": {
     "recipes": [
-      "industrialforegoing:laser_drill_fluid/wither"
+      "ifwootaddon:laser_drill_ore/stygian_dust"
     ]
   }
 }
