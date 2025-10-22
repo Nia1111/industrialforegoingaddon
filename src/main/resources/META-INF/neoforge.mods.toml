@@ -4,35 +4,35 @@ issueTrackerURL = "https://github.com/wootrevived/industrialforegoingaddon/issue
 license = "MIT"
 
 [[mods]]
-modId = "${file.modId}"
-version = "${file.jarVersion}"
-displayName = "${file.modName}"
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
 displayURL = "https://github.com/wootrevived/industrialforegoingaddon"
 authors = "pharuxtan"
 description = '''Woot Revived Addon that add compatibility with Industrial Foregoing'''
 
-[[dependencies.${file.modId}]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 type = "required"
 versionRange = "[${mc_version}]"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.${file.modId}]]
+[[dependencies.${mod_id}]]
 modId = "neoforge"
 type = "required"
 versionRange = "[${neo_version},)"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.${file.modId}]]
+[[dependencies.${mod_id}]]
 modId="woot_revived"
 type = "required"
 versionRange = "[${woot_version},)"
 ordering="NONE"
 side="BOTH"
 
-[[dependencies.${file.modId}]]
+[[dependencies.${mod_id}]]
 modId="industrialforegoing"
 type = "required"
 versionRange = "[${if_version},)"

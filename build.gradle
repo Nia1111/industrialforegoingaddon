@@ -1,64 +1,80 @@
 plugins {
     id 'java'
+    id 'idea'
     id 'maven-publish'
 
     id "me.shedaniel.unified-publishing" version "0.1.+"
 
-    id 'net.neoforged.gradle.userdev' version '7.0.192'
+    id 'net.neoforged.moddev' version '2.0.115'
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of("${java_version}")
+java.toolchain.languageVersion = JavaLanguageVersion.of(java_version.toInteger())
 java.withSourcesJar()
 
 sourceSets.main.resources.srcDirs += "src/main/generated"
 
 group = 'wootrevived'
-archivesBaseName = "ifwootaddon"
 def buildVersion = "${mod_version}"
 version = "${mc_version}-${buildVersion}"
 
-runs {
-    configureEach {
-        workingDirectory project.file('run')
+base {
+    archivesName = "ifwootaddon"
+}
 
-        systemProperty 'forge.logging.markers', 'REGISTRIES'
-        systemProperty 'forge.logging.console.level', 'debug'
+neoForge {
+    version = neo_version
 
-        modSource sourceSets.main
+    runs {
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+
+        client {
+            client()
+
+            gameDirectory = file('runs/client')
+        }
+
+        data {
+            data()
+
+            gameDirectory = file('runs/data')
+
+            programArguments.addAll '--mod', mod_id, '--all', '--output', file('src/main/generated/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        server {
+            server()
+
+            gameDirectory = file('runs/server')
+
+            programArgument '--nogui'
+        }
     }
 
-    client {
-        systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
-    }
-
-    server {
-        systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
-        argument '--nogui'
-    }
-
-    gameTestServer {
-        systemProperty 'neoforge.enabledGameTestNamespaces', mod_id
-    }
-
-    data {
-        workingDirectory project.file('run-data')
-
-        arguments.addAll '--mod', mod_id, '--all', '--output', file('src/main/generated/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    mods {
+        ifwootaddon {
+            sourceSet sourceSets.main
+        }
     }
 }
 
-processResources {
-    filesMatching('META-INF/neoforge.mods.toml') {
-        expand 'file': [
-                        'modId': mod_id,
-                        'modName': mod_name,
-                        'jarVersion': mod_version
-                ],
-                'mc_version': mc_version,
-                'neo_version': neo_version,
-                'woot_version': woot_version,
-                'if_version': if_version,
-                'neo_major_version': neo_version.split('\\.')[0]
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            mod_id            : mod_id,
+            mod_name          : mod_name,
+            mod_version       : mod_version,
+            mc_version        : mc_version,
+            neo_version       : neo_version,
+            woot_version      : woot_version,
+            if_version        : if_version,
+            neo_major_version : neo_version.split('\\.')[0]
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
     }
 }
 
@@ -77,8 +93,6 @@ repositories {
 }
 
 dependencies {
-    implementation "net.neoforged:neoforge:${neo_version}"
-
     compileOnly 'org.jetbrains:annotations:22.0.0'
 
     // JEI
@@ -98,22 +112,7 @@ dependencies {
     implementation "maven.modrinth:titanium:${titanium_version}"
 
     // Optimizations
-    localRuntime "org.embeddedt:embeddium-${mc_version}:${embeddium_version}"
-    localRuntime "maven.modrinth:modernfix:${modernfix_version}"
     localRuntime "maven.modrinth:ferrite-core:${ferritecore_version}"
-}
-
-publishing {
-    publications {
-        register('mavenJava', MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
 }
 
 jar {
