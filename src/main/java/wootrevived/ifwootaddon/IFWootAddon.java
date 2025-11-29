@@ -4,6 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.NotNull;
+import wootrevived.ifwootaddon.registries.ComponentsRegistry;
 import wootrevived.ifwootaddon.registries.IFItemsRegistry;
 
 @Mod(IFWootAddon.MOD_ID)
@@ -13,6 +14,7 @@ public class IFWootAddon
 
     public IFWootAddon(IEventBus bus)
     {
+        ComponentsRegistry.register(bus);
         IFItemsRegistry.register(bus);
     }
 

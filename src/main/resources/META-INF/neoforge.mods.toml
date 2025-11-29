@@ -11,6 +11,9 @@ displayURL = "https://github.com/wootrevived/industrialforegoingaddon"
 authors = "pharuxtan"
 description = '''Woot Revived Addon that add compatibility with Industrial Foregoing'''
 
+[[mixins]]
+config = "ifwootaddon.mixins.json"
+
 [[dependencies.${mod_id}]]
 modId = "minecraft"
 type = "required"

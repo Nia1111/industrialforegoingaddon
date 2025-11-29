@@ -2,25 +2,29 @@ package wootrevived.ifwootaddon.upgrades;
 
 import com.buuz135.industrial.module.ModuleCore;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.common.MutableDataComponentHolder;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jetbrains.annotations.NotNull;
 import wootrevived.api.WootUpgradeItem;
+import wootrevived.api.enums.UpgradeNoVariant;
 import wootrevived.api.interfaces.WootDropsProperties;
 import wootrevived.api.registrations.WootUpgradeItemRegistration;
 import wootrevived.ifwootaddon.IFWootAddon;
 
 import java.util.List;
 
-public class MobSlaughterFactory extends WootUpgradeItem {
-    public MobSlaughterFactory(int level) { super(new Properties(), level); }
+public class MobSlaughterFactory extends WootUpgradeItem<UpgradeNoVariant> {
+    public MobSlaughterFactory() {
+        super(new Properties(), UpgradeNoVariant.NONE);
+    }
 
     @Override
-    public void modifyDrops(WootDropsProperties properties, CompoundTag upgradeTag) {
+    public void modifyDrops(@NotNull WootDropsProperties properties, @NotNull MutableDataComponentHolder dataComponentHolder) {
         List<FluidStack> fluids = properties.getFluidDrops();
 
         LivingEntity entity = properties.getEntity();
@@ -42,5 +46,5 @@ public class MobSlaughterFactory extends WootUpgradeItem {
     }
 
     public static final String MOB_SLAUGHTER_FACTORY_TAG = "mob_slaughter_factory_upgrade";
-    public static final DeferredHolder<Item, MobSlaughterFactory> MOB_SLAUGHTER_FACTORY_ITEM = ITEMS.register(MOB_SLAUGHTER_FACTORY_TAG, () -> new MobSlaughterFactory(1));
+    public static final DeferredHolder<Item, MobSlaughterFactory> MOB_SLAUGHTER_FACTORY_ITEM = ITEMS.register(MOB_SLAUGHTER_FACTORY_TAG, MobSlaughterFactory::new);
 }

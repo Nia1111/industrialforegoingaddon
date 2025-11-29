@@ -28,6 +28,8 @@ neoForge {
         configureEach {
             systemProperty 'forge.logging.markers', 'REGISTRIES'
             logLevel = org.slf4j.event.Level.DEBUG
+
+            jvmArguments.addAll "-Dmixin.debug=true", "-Dmixin.checks.interfaces=true", "-Dmixin.debug.export=true"
         }
 
         client {
@@ -104,7 +106,7 @@ dependencies {
     implementation "maven.modrinth:jade:${jade_version}"
 
     // Woot
-    implementation "maven.modrinth:woot-revived:${mc_version}-${woot_version}"
+    implementation "maven.modrinth:woot-revived:${woot_version}"
     localRuntime "maven.modrinth:guideme:${guideme_version}"
 
     // Industrial Foregoing
