@@ -5,7 +5,7 @@ navigation:
     icon: "ifwootaddon:laser_drill_upgrade"
     position: 2
 ---
-# Industrial Foregoing Upgrades
+# Industrial Foregoing連携アップグレード
 
 <Row>
   <ItemImage id="ifwootaddon:laser_drill_upgrade" scale="3"/>
@@ -13,27 +13,27 @@ navigation:
   <ItemImage id="ifwootaddon:mob_slaughter_factory_upgrade" scale="3"/>
 </Row>
 
-The upgrades from the addon for Industrial Foregoing
+Industrial Foregoing連携アドオンのアップグレード
 
-## <ItemImage id="ifwootaddon:laser_drill_upgrade" scale="0.5" /> Laser Drill Upgrade
+## <ItemImage id="ifwootaddon:laser_drill_upgrade" scale="0.5" /> レーザードリルアップグレード
 
-Apply the upgrade to the slot, then right-click the slot with a lens to make the upgrade produce all fluids that lens can generate.
+スロットにアップグレードを適用し、そのスロットをレンズで右クリックしてください。これにより、レンズが生成可能な液体をファクトリーが生産するようになります。
 
-## <ItemImage id="ifwootaddon:mob_crusher_upgrade" scale="0.5" /> Mob Crusher Upgrade
+## <ItemImage id="ifwootaddon:mob_crusher_upgrade" scale="0.5" /> Mob粉砕機アップグレード
 
-Output <ItemImage id="industrialforegoing:essence_bucket" scale="0.5"/> Essence Fluid based on the mob dropped XP
+モブがドロップした経験値に基づいて<ItemImage id="industrialforegoing:essence_bucket" scale="0.5"/>エッセンスを生産するようになります。
 
-Formula: XP * 20
+計算式: XP * 20
 
-## <ItemImage id="ifwootaddon:mob_slaughter_factory_upgrade" scale="0.5" /> Mob Slaughter Factory Upgrade
+## <ItemImage id="ifwootaddon:mob_slaughter_factory_upgrade" scale="0.5" /> Mob屠殺機アップグレード
 
-Output <ItemImage id="industrialforegoing:meat_bucket" scale="0.5"/> Liquid Meat Fluid and <ItemImage id="industrialforegoing:pink_slime_bucket" scale="0.5"/> Pink Slime Fluid based on the mob max health
+モブの最大HPに基づいて、<ItemImage id="industrialforegoing:meat_bucket" scale="0.5"/>液状肉と<ItemImage id="industrialforegoing:pink_slime_bucket" scale="0.5"/>ピンクスライムを生産するようになります。
 
-Formula:  
-Mob is an animal: 
- - <ItemImage id="industrialforegoing:pink_slime_bucket" scale="0.5"/> Pink Slime: Max Health * 20  
- - <ItemImage id="industrialforegoing:meat_bucket" scale="0.5"/> Liquid Meat: Max Health
+計算式:  
+モブが動物の場合: 
+ - <ItemImage id="industrialforegoing:pink_slime_bucket" scale="0.5"/> ピンクスライム: 最大HP * 20  
+ - <ItemImage id="industrialforegoing:meat_bucket" scale="0.5"/> 液状肉: 最大HP
 
-Mob is not an animal:  
- - <ItemImage id="industrialforegoing:pink_slime_bucket" scale="0.5"/> Pink Slime: Max Health  
- - <ItemImage id="industrialforegoing:meat_bucket" scale="0.5"/> Liquid Meat: Max Health * 20
+モブが動物ではない場合:  
+ - <ItemImage id="industrialforegoing:pink_slime_bucket" scale="0.5"/> ピンクスライム: 最大HP  
+ - <ItemImage id="industrialforegoing:meat_bucket" scale="0.5"/> 液状肉: 最大HP * 20
