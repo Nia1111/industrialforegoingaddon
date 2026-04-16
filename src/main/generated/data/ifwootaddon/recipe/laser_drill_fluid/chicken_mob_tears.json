@@ -9,10 +9,16 @@
   "catalyst": {
     "item": "ifwootaddon:stygian_laser_lens"
   },
-  "entity": "minecraft:chicken",
+  "entity_data": {
+    "data": {},
+    "display": "",
+    "entity": {
+      "type": "minecraft:chicken"
+    }
+  },
   "output": {
     "amount": 500,
-    "id": "woot_revived:mob_tears_fluid"
+    "fluid": "woot_revived:mob_tears_fluid"
   },
   "rarity": [
     {

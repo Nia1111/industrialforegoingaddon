@@ -9,10 +9,16 @@
   "catalyst": {
     "item": "ifwootaddon:stygian_laser_lens"
   },
-  "entity": "minecraft:ender_dragon",
+  "entity_data": {
+    "data": {},
+    "display": "",
+    "entity": {
+      "type": "minecraft:ender_dragon"
+    }
+  },
   "output": {
     "amount": 10000,
-    "id": "woot_revived:mob_tears_fluid"
+    "fluid": "woot_revived:mob_tears_fluid"
   },
   "rarity": [
     {

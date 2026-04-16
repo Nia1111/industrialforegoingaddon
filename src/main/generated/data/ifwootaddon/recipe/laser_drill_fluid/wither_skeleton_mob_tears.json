@@ -9,10 +9,16 @@
   "catalyst": {
     "item": "ifwootaddon:stygian_laser_lens"
   },
-  "entity": "minecraft:wither_skeleton",
+  "entity_data": {
+    "data": {},
+    "display": "",
+    "entity": {
+      "type": "minecraft:wither_skeleton"
+    }
+  },
   "output": {
     "amount": 5000,
-    "id": "woot_revived:mob_tears_fluid"
+    "fluid": "woot_revived:mob_tears_fluid"
   },
   "rarity": [
     {

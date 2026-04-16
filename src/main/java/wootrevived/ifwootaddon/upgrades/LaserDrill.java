@@ -3,6 +3,7 @@ package wootrevived.ifwootaddon.upgrades;
 import com.buuz135.industrial.item.LaserLensItem;
 import com.buuz135.industrial.module.ModuleCore;
 import com.buuz135.industrial.recipe.LaserDrillFluidRecipe;
+import com.buuz135.industrial.recipe.data.EntityIngredient;
 import com.hrznstudio.titanium.util.RecipeUtil;
 import com.mojang.serialization.Codec;
 import net.minecraft.ChatFormatting;
@@ -15,6 +16,7 @@ import net.minecraft.util.ByIdMap;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.common.MutableDataComponentHolder;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.NotNull;
@@ -63,9 +66,11 @@ public class LaserDrill extends WootUpgradeItem<LaserDrill.Variant> {
 
         List<LaserDrillFluidRecipe> fluidRecipes = (List<LaserDrillFluidRecipe>) RecipeUtil.getRecipes(properties.getLevel(), ModuleCore.LASER_DRILL_FLUID_TYPE.get());
         for(LaserDrillFluidRecipe recipe : fluidRecipes){
-            if(recipe.catalyst.test(lens) && !recipe.entity.equals(LaserDrillFluidRecipe.EMPTY) &&
-                    recipe.entity.equals(BuiltInRegistries.ENTITY_TYPE.getKey(properties.getFactoryMob().getEntityType()))){
-                fluids.add(recipe.output.copy());
+            if(recipe.catalyst.test(lens) && recipe.entityData.isPresent() && !recipe.entityData.get().getEntity().equals(EntityIngredient.EMPTY)
+                    && (recipe.entityData.get().getEntity().equals(EntityIngredient.ANY)
+                    || EntityType.getKey(recipe.entityData.get().getEntity().entityType()).equals(EntityType.getKey(properties.getFactoryMob().getEntityType())))){
+                SizedFluidIngredient output = recipe.output;
+                fluids.add(output.getFluids()[0].copy());
             }
         }
     }

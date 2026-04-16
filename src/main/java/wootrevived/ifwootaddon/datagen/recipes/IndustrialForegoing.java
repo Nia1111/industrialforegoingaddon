@@ -7,6 +7,7 @@ import com.buuz135.industrial.recipe.DissolutionChamberRecipe;
 import com.buuz135.industrial.recipe.LaserDrillFluidRecipe;
 import com.buuz135.industrial.recipe.LaserDrillOreRecipe;
 import com.buuz135.industrial.recipe.LaserDrillRarity;
+import com.buuz135.industrial.recipe.data.EntityData;
 import com.buuz135.industrial.utils.IndustrialTags;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementRequirements;
@@ -15,6 +16,7 @@ import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -24,7 +26,9 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ItemExistsCondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 import wootrevived.ifwootaddon.registries.IFItemsRegistry;
 import wootrevived.ifwootaddon.upgrades.LaserDrill;
 import wootrevived.ifwootaddon.upgrades.MobCrusher;
@@ -112,94 +116,94 @@ public class IndustrialForegoing {
         );
 
         createLaserDrillFluidRecipe(output, "warden_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 30000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 30000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "warden"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.WARDEN)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "wither_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 20000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 20000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "wither"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.WITHER)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "ender_dragon_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 10000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 10000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "ender_dragon"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.ENDER_DRAGON)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "wither_skeleton_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "wither_skeleton"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.WITHER_SKELETON)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "ghast_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "ghast"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.GHAST)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "enderman_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 5000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "enderman"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.ENDERMAN)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "blaze_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 2000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 2000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "blaze"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.BLAZE)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "zombie_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "zombie"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.ZOMBIE)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "skeleton_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "skeleton"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.SKELETON)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "creeper_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "creeper"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.CREEPER)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "spider_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 1000),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "spider"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.SPIDER)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "cow_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "cow"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.COW)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "sheep_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "sheep"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.SHEEP)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "chicken_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "chicken"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.CHICKEN)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
         createLaserDrillFluidRecipe(output, "pig_mob_tears", "minecraft", new LaserDrillFluidRecipe(
-                new FluidStack(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
+                SizedFluidIngredient.of(FluidsRegistry.SOURCE_MOB_TEARS_FLUID.get(), 500),
                 Ingredient.of(IFItemsRegistry.STYGIAN_LASER_LENS_ITEM.get()),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "pig"),
-                new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)}
+                Optional.of(EntityData.of(EntityType.PIG)),
+                List.of(new LaserDrillRarity[]{new LaserDrillRarity(new LaserDrillRarity.BiomeRarity(new ArrayList<>(), new ArrayList<>()), new LaserDrillRarity.DimensionRarity(new ArrayList<>(), new ArrayList<>()), -64, 256, 8)})
         ));
     }
 
@@ -215,8 +219,7 @@ public class IndustrialForegoing {
     }
 
     public static void createLaserDrillOreItemRecipe(RecipeOutput recipeOutput, ItemLike itemLike, int color, LaserDrillRarity... rarity) {
-        Ingredient output = Ingredient.of(new ItemLike[]{itemLike});
-        LaserDrillOreRecipe recipe = new LaserDrillOreRecipe(output, color, rarity);
+        LaserDrillOreRecipe recipe = new LaserDrillOreRecipe(SizedIngredient.of(itemLike, 1), color, rarity);
         ResourceLocation rl = ResourceLocation.fromNamespaceAndPath("ifwootaddon", "laser_drill_ore/" + BuiltInRegistries.ITEM.getKey(itemLike.asItem()).getPath());
         AdvancementHolder advancementHolder = recipeOutput.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(rl)).rewards(AdvancementRewards.Builder.recipe(rl)).requirements(AdvancementRequirements.Strategy.OR).build(rl);
         recipeOutput.accept(rl, recipe, advancementHolder);
